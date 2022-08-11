@@ -1,0 +1,60 @@
+@import './vars'
+
+*
+    padding: 0
+    margin: 0
+    box-sizing: border-box
+    color: $main-color
+    font-family: $font-family
+
+body
+    overflow: hidden
+
+ul
+    list-style-type: none
+
+svg
+    font-size: 1.5em
+
+button
+    background: $button-color
+    padding: 6px 10px
+    border: 2px solid white
+    border-radius: 6px
+    cursor: pointer
+
+input, textarea
+    color: $dark-color
+    font-size: 0.9em
+    padding: 8px 10px 7px 10px
+    border: none
+    border-radius: 6px
+
+span
+    display: block
+    font-size: 0.5em
+    color: darken($main-color, 20%)
+
+::-webkit-scrollbar
+    width: $scrollbar-width
+
+::-webkit-scrollbar-track
+    background: transparent
+    border-radius: 6px
+
+::-webkit-scrollbar-thumb
+    background: $scrollbar-color
+    border-radius: 6px
+    &:hover
+        background: $scrollbar-hover-color
+
+[error]
+    color: $danger-color
+    font-size: 0.8em
+    font-weight: 400
+    margin-bottom: 2px
+
+.root
+    display: flex
+    height: 100vh
+    background: $bg-shadow, $bg-image

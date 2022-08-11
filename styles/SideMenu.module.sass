@@ -1,0 +1,81 @@
+@import './vars'
+
+.container
+    flex: 1
+    margin: 10px 20px
+    padding: 10px 20px
+    border: 3px solid white
+    border-radius: 15px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    *
+        flex: 1
+    .profile
+        min-height: 55px
+        max-height: 55px
+        display: flex
+        padding-bottom: 6px
+        border-bottom: 3px solid white
+        margin-bottom: 30px
+        align-items: center
+        justify-content: space-between
+        p
+            font-weight: 500
+            font-size: 1.6em
+            flex: 10
+        button
+            font-size: 1.1em
+            padding: 6px 6px
+            border: none
+            svg path
+                transition: color 200ms ease-in
+            &:hover svg path
+                color: $danger-color
+
+    .searchBar
+        position: relative
+        input
+            width: 100%
+            padding-right: 40px
+        button
+            padding: 6px
+            position: absolute
+            right: 0
+            border: none
+            svg path
+                color: $dark-color
+
+    .tabSelect
+        .tabPeople, .tabGroups
+            border: none
+            width: 50%
+            @include button-transition($button-hover-color)
+            &.chosen
+                font-weight: 700
+        .tabPeople
+            float: left
+        .tabGroups
+            float: right
+
+    .chatListContainer
+        flex: 10
+        overflow: auto
+        margin-bottom: 20px
+        padding-right: 4px
+        li
+            width: 100%
+            margin: 3px 0
+            padding: 10px 20px
+            border-radius: 6px
+            cursor: pointer
+            @include button-transition($button-hover-color)
+
+    .addChat
+        button
+            font-size: 1em
+            width: 100%
+            @include button-transition($button-hover-color)
+            svg
+                font-size: 1.1em
+                margin-left: 10px

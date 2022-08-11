@@ -1,0 +1,79 @@
+@import './vars'
+
+.container
+    flex: 3
+    margin: 10px 20px
+    padding: 10px 20px
+    border: 3px solid white
+    border-radius: 15px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    *
+        flex: 1
+    .title
+        min-height: 55px
+        max-height: 55px
+        display: flex
+        padding-bottom: 6px
+        border-bottom: 3px solid white
+        margin-bottom: 30px
+        align-items: center
+        svg
+            flex: 1
+        p
+            flex: 100
+            display: inline-block
+            margin-left: 20px
+            font-weight: 500
+            font-size: 1.6em
+        button
+            border: none
+            svg
+                font-size: 2em
+                path
+                    transition: color 200ms ease-in
+            &:hover svg path
+                color: $danger-color
+    .messageListContainer
+        flex: 10
+        overflow: auto
+        margin-bottom: 20px
+        ul
+            display: flex
+            flex-direction: column
+            li > div
+                display: inline-block
+                margin: 6px 0
+                padding: 4px 20px
+                background-color: $message-color
+                border-radius: 10px
+                .username
+                    font-size: 0.7em
+                    font-weight: 600
+                    margin-bottom: 2px
+                .date
+                    font-size: 0.6em
+                    font-weight: 300
+                &.my
+                    float: right
+                    height: 100%
+    .messageInput
+        position: relative
+        textarea
+            width: calc( 100% - 50px )
+            margin-right: 100px
+            padding: 10px 10px 9px 10px
+            font-size: 1.1em
+            resize: none
+        button
+            right: 4px
+            top: 2px
+            border: none
+            position: absolute
+            svg
+                font-size: 2em
+                path
+                    transition: color 200ms ease-in
+            &:hover svg path
+                color: $danger-color
