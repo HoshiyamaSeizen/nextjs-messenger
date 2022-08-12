@@ -28,8 +28,12 @@
             font-size: 1.1em
             padding: 6px 6px
             border: none
-            svg path
-                transition: color 200ms ease-in
+            svg
+                width: 28px
+                height: 28px
+                font-size: 1.5em
+                path
+                    transition: color 200ms ease-in
             &:hover svg path
                 color: $danger-color
 
@@ -77,5 +81,5 @@
             width: 100%
             @include button-transition($button-hover-color)
             svg
-                font-size: 1.1em
+                width: 16px
                 margin-left: 10px
