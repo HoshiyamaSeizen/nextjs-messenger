@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { deleteCookie } from 'cookies-next';
 import {
 	faGear,
@@ -9,12 +8,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/SideMenu.module.sass';
 
-const SideMenu = ({ user }) => {
-	const router = useRouter();
-
+const SideMenu = ({ user, redirect }) => {
 	const logout = () => {
 		deleteCookie('token');
-		router.push('/');
+		redirect();
 	};
 
 	const openChatModule = () =>

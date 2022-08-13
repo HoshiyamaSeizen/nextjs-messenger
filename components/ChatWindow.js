@@ -2,7 +2,7 @@ import { faUsers, faUser, faBars, faPaperPlane, faXmark } from '@fortawesome/fre
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/Chat.module.sass';
 
-const Chat = () => {
+const ChatWindow = () => {
 	const openMenu = () => document.getElementById('info-container').setAttribute('opened', '');
 
 	return (
@@ -56,4 +56,4 @@ const Chat = () => {
 	);
 };
 
-export default Chat;
+export default ChatWindow;
