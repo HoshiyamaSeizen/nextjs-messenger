@@ -5,6 +5,7 @@ import apiError from '../../../middleware/apiError';
 import auth from '../../../middleware/auth';
 import User from '../../../mongo/models/User';
 import Info from '../../../mongo/models/Info';
+import Chat from '../../../mongo/models/Chat';
 
 const handler = async (req, res) => {
 	const { method } = req;
@@ -81,6 +82,12 @@ const handler = async (req, res) => {
 				auth(req, res, async () => {
 					const user = await User.findById(req.id);
 					if (!user) return apiError(res, 400, 'User not found');
+
+					await user.chats.forEach(async (cid) => {
+						const chat = await Chat.findById(cid);
+						if (chat) chat.members = chat.members.filter((uid) => uid !== +user._id);
+						await chat.save();
+					});
 
 					await User.findByIdAndDelete(req.id);
 
