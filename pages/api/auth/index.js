@@ -67,3 +67,14 @@ const handler = async (req, res) => {
 };
 
 export default handler;
+
+export const validate = async (token) => {
+	if (!token) return false;
+	try {
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		const user = await User.findById(decoded.id).select('-password -__v');
+		return user;
+	} catch (e) {
+		return false;
+	}
+};

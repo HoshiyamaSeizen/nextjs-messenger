@@ -1,16 +1,15 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
+import { validate } from './api/auth/index';
 import styles from '../styles/Home.module.sass';
+
+import * as cookie from 'cookie';
 
 const Home = () => {
 	const router = useRouter();
-
-	useEffect(() => {
-		// router.push('/chat');
-	}, [router]);
+	const redirect = () => router.push('/chat');
 
 	return (
 		<div className={styles.root}>
@@ -29,8 +28,8 @@ const Home = () => {
 					group chats.
 				</p>
 				<div className={styles.authorization}>
-					<SignupForm className={styles.signup} />
-					<LoginForm className={styles.login} />
+					<SignupForm className={styles.signup} redirect={redirect} />
+					<LoginForm className={styles.login} redirect={redirect} />
 				</div>
 			</main>
 			<footer>
@@ -38,6 +37,19 @@ const Home = () => {
 			</footer>
 		</div>
 	);
+};
+
+export const getServerSideProps = async ({ req: { headers } }) => {
+	const token = headers.cookie ? cookie.parse(headers.cookie)['token'] : null;
+	if (await validate(token)) {
+		return {
+			redirect: {
+				destination: '/chat',
+				permanent: false,
+			},
+			props: {},
+		};
+	} else return { props: {} };
 };
 
 export default Home;
