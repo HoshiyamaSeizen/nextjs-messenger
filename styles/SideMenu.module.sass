@@ -55,7 +55,8 @@
             border: none
             width: 50%
             @include button-transition($button-hover-color)
-            &.chosen
+            &[chosen=true]
+                background-color: $tab-chosen-color
                 font-weight: 700
         .tabPeople
             float: left

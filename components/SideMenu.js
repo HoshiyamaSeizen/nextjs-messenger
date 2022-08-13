@@ -8,11 +8,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/SideMenu.module.sass';
 
-const SideMenu = ({ user, redirect }) => {
+const SideMenu = ({ user, redirect, tab }) => {
 	const logout = () => {
 		deleteCookie('token');
 		redirect();
 	};
+
+	const isPeople = () => tab.value === 'people';
+	const isGroups = () => tab.value === 'groups';
 
 	const openChatModule = () =>
 		document.getElementById('chat-add-module').setAttribute('opened', '');
@@ -40,8 +43,20 @@ const SideMenu = ({ user, redirect }) => {
 				</button>
 			</div>
 			<div className={styles.tabSelect}>
-				<button className={styles.tabPeople}>People</button>
-				<button className={styles.tabGroups}>Groups</button>
+				<button
+					className={styles.tabPeople}
+					chosen={isPeople().toString()}
+					onClick={() => tab.set('people')}
+				>
+					People
+				</button>
+				<button
+					className={styles.tabGroups}
+					chosen={isGroups().toString()}
+					onClick={() => tab.set('groups')}
+				>
+					Groups
+				</button>
 			</div>
 			<div className={styles.chatListContainer}>
 				<ul>
@@ -54,7 +69,7 @@ const SideMenu = ({ user, redirect }) => {
 			</div>
 			<div className={styles.addChat}>
 				<button onClick={openChatModule}>
-					Add Chat <FontAwesomeIcon icon={faPlus} />
+					{isPeople() ? 'Add Person' : 'Add Chat'} <FontAwesomeIcon icon={faPlus} />
 				</button>
 			</div>
 		</div>

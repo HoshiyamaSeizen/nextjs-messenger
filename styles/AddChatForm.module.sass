@@ -1,12 +1,21 @@
 @import './vars'
 
+.tabSelect
+    .tabPeople, .tabGroups
+        border: none
+        width: 50%
+        margin-bottom: 6px
+        @include button-transition($button-hover-color)
+        &[chosen=true]
+            background-color: $tab-chosen-color
+            font-weight: 700
+    .tabPeople
+        float: left
+    .tabGroups
+        float: right
 .input
     width: 100%
-    margin-bottom: 20px
-.addExisting, .addNew
-    width: 46%
+    margin-bottom: 10px
+.add
+    width: 100%
     @include button-transition($button-hover-color)
-.addExisting
-    float: left
-.addNew
-    float: right

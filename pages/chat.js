@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 const Chat = ({ userData }) => {
 	const [user, setUser] = useState(userData);
+	const [tab, setTab] = useState('people');
 	const router = useRouter();
 	const redirect = () => router.push('/');
 
@@ -29,10 +30,10 @@ const Chat = ({ userData }) => {
 
 	return (
 		<div className="root">
-			<SideMenu user={user} redirect={redirect} />
+			<SideMenu user={user} redirect={redirect} tab={{ value: tab, set: setTab }} />
 			<ChatWindow />
 			<InfoMenu />
-			<AddChatForm />
+			<AddChatForm tab={tab} />
 			<ProfileSettings renameUser={renameUser} deleteUser={deleteUser} />
 		</div>
 	);
