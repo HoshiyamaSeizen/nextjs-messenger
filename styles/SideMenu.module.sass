@@ -47,8 +47,14 @@
             position: absolute
             right: 0
             border: none
-            svg path
-                color: $dark-color
+            svg
+                width: 20px
+                height: 20px
+                path
+                    color: $dark-color
+                    transition: color 200ms ease-in
+            &:hover svg path
+                color: $danger-color
 
     .tabSelect
         .tabPeople, .tabGroups
@@ -75,6 +81,9 @@
             border-radius: 6px
             cursor: pointer
             @include button-transition($button-hover-color)
+            &.firstGlobal
+                border-top: 2px solid $main-color
+                border-radius: 0
 
     .addChat
         button

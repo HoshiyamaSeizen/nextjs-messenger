@@ -43,7 +43,16 @@
         flex: 10
         overflow: auto
         margin-bottom: 20px
+        position: relative
+        & > p
+            position: absolute
+            width: 100%
+            top: 50%
+            transform: translateY(-100%)
+            text-align: center
+            font-size: 2em
         ul
+            margin-right: 12px
             display: flex
             flex-direction: column
             li > div
@@ -83,3 +92,9 @@
                     transition: color 200ms ease-in
             &:hover svg path
                 color: $danger-color
+    .enterButton
+        width: 95%
+        max-height: 40px
+        margin: 0 auto 10px
+        font-size: 1em
+        @include button-transition($button-hover-color)

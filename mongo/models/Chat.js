@@ -25,6 +25,7 @@ const chatSchema = new mongoose.Schema({
 		type: [
 			{
 				user: Number,
+				name: String,
 				text: String,
 				time: Date,
 			},

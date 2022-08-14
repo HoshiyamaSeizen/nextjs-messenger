@@ -25,6 +25,10 @@ const handler = async (req, res) => {
 					if (chat.members.includes(+req.id))
 						return apiError(res, 400, 'You are already the member of the chat');
 
+					user.chats.push(id);
+					const savedUser = await user.save();
+					if (!savedUser) return apiError(res, 400, 'User not found');
+
 					chat.members.push(req.id);
 					const savedChat = await chat.save();
 					if (!savedChat) return apiError(res, 500, 'Error while saving chat');
@@ -59,6 +63,10 @@ const handler = async (req, res) => {
 						if (!savedInfo) return apiError(res, 500, 'Error while saving chats info');
 						return res.json({ msg: 'chat deleted' });
 					}
+
+					user.chats = user.chats.filter((chat) => chat !== +id);
+					const savedUser = await user.save();
+					if (!savedUser) return apiError(res, 500, 'Error while saving user');
 
 					chat.members = chat.members.filter((uid) => uid !== +req.id);
 					const savedChat = await chat.save();

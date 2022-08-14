@@ -1,8 +1,11 @@
 import Module from './Module';
 import styles from '../styles/AddChatForm.module.sass';
 import { useState } from 'react';
+import addGroupAction from '../actions/addGroup';
+import createGroupAction from '../actions/createGroup';
+import addPersonAction from '../actions/addPerson';
 
-const AddChatForm = ({ tab }) => {
+const AddChatForm = ({ tab, addChat }) => {
 	const [text, setText] = useState('');
 	const [type, setType] = useState('existing');
 	const [message, setMessage] = useState('');
@@ -12,14 +15,48 @@ const AddChatForm = ({ tab }) => {
 	const isExisting = () => type === 'existing';
 	const isNew = () => type === 'new';
 
+	const addPerson = (id) => {
+		addPersonAction(id)
+			.then((chat) => {
+				addChat();
+				close();
+			})
+			.catch((err) => setMessage(err));
+	};
+
+	const addGroup = (id) => {
+		addGroupAction(id)
+			.then((chat) => {
+				addChat();
+				close();
+			})
+			.catch((err) => setMessage(err));
+	};
+
+	const createGroup = (name) => {
+		createGroupAction(name)
+			.then((chat) => {
+				addChat();
+				close();
+			})
+			.catch((err) => setMessage(err));
+	};
+
 	const submit = () => {
 		setMessage('');
 		if (!text) setMessage("Field sholdn't be empty");
+
+		if (isPeople()) {
+			addPerson(+text);
+		} else if (isGroups() && isExisting()) {
+			addGroup(+text);
+		} else if (isGroups() && isNew()) {
+			createGroup(text);
+		}
 	};
 
-	const handleTextChange = (e) => {
-		setText(e.target.value);
-	};
+	const handleTextChange = (e) => setText(e.target.value);
+	const close = () => document.getElementById('chat-add-module').removeAttribute('opened');
 
 	return (
 		<Module id="chat-add-module" width={420} height={isGroups() ? 185 : 155}>

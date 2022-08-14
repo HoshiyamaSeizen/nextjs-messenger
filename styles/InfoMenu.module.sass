@@ -27,8 +27,12 @@
                 transition: color 200ms ease-in
         &:hover svg path
             color: $danger-color
-    h2, .creationDate
-        margin-bottom: 20px
+    h2
+        margin-bottom: 40px
+    .creationDate
+        margin-bottom: 5px
+    .owner
+        margin-bottom: 30px
     .memberListContainer
         flex: 100
         overflow: auto
@@ -37,9 +41,8 @@
         li
             width: 100%
             margin: 3px 0
-            padding: 10px 2px
+            padding: 10px 20px
             border-radius: 6px
-            cursor: pointer
             @include button-transition($button-hover-color)
     .exitGroupBtn
         @include button-transition($button-hover-color)

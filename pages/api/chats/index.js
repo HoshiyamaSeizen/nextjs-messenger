@@ -39,7 +39,7 @@ const handler = async (req, res) => {
 						if (chat) return apiError(res, 400, 'This personal chat already exists');
 
 						name = 'chat';
-						if (target === req.id)
+						if (target === +req.id)
 							return apiError(res, 400, 'User and target should not match');
 						targetUser = await User.findById(target);
 						if (!targetUser) return apiError(res, 400, 'Target user not found');
@@ -74,6 +74,10 @@ const handler = async (req, res) => {
 					if (personal) {
 						targetUser.chats.push(savedChat._id);
 						await targetUser.save();
+
+						savedChat.dbid = savedChat._id;
+						savedChat._id = targetUser.id;
+						savedChat.name = targetUser.name;
 					}
 
 					res.json({

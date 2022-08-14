@@ -1,40 +1,35 @@
 import * as cookie from 'cookie';
 import { validate } from './api/auth/index';
-import renameUserAction from '../actions/renameUser';
-import deleteUserAction from '../actions/deleteUser';
 import SideMenu from '../components/SideMenu';
 import ChatWindow from '../components/ChatWindow';
-import InfoMenu from '../components/InfoMenu';
-import AddChatForm from '../components/AddChatForm';
-import ProfileSettings from '../components/ProfileSettings';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const Chat = ({ userData }) => {
 	const [user, setUser] = useState(userData);
-	const [tab, setTab] = useState('people');
+	const [currentChat, setCurrentChat] = useState(null);
+	const [changeList, setChangeList] = useState(true);
 	const router = useRouter();
 	const redirect = () => router.push('/');
 
-	const renameUser = (newName) => {
-		renameUserAction({ name: newName })
-			.then(({ name }) => setUser({ ...user, name }))
-			.catch((err) => console.log(err));
-	};
-
-	const deleteUser = () => {
-		deleteUserAction()
-			.then(() => redirect())
-			.catch((err) => console.log(err));
-	};
-
 	return (
 		<div className="root">
-			<SideMenu user={user} redirect={redirect} tab={{ value: tab, set: setTab }} />
-			<ChatWindow />
-			<InfoMenu />
-			<AddChatForm tab={tab} />
-			<ProfileSettings renameUser={renameUser} deleteUser={deleteUser} />
+			<SideMenu
+				user={user}
+				setUser={setUser}
+				redirect={redirect}
+				setChat={setCurrentChat}
+				needChange={{
+					value: changeList,
+					set: setChangeList,
+					clear: () => setChangeList(false),
+				}}
+			/>
+			<ChatWindow
+				chatid={currentChat}
+				setChatID={setCurrentChat}
+				updateList={() => setChangeList(true)}
+			/>
 		</div>
 	);
 };

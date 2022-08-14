@@ -21,7 +21,16 @@ const handler = async (req, res) => {
 					const chats = [];
 					for await (const cid of user.chats) {
 						const chat = await Chat.findById(cid);
-						chats.push({ name: chat.name, _id: chat._id });
+						if (chat.personal && chat.members.length == 2) {
+							const uid = chat.members[0] !== +req.id ? chat.members[0] : chat.members[1];
+							const target = await User.findById(uid).select('name');
+							chats.push({
+								name: target.name,
+								_id: target._id,
+								personal: true,
+								bdid: chat._id,
+							});
+						} else chats.push({ name: chat.name, _id: chat._id, personal: false });
 					}
 
 					if (!starts) return res.json({ userChats: chats });
@@ -29,12 +38,15 @@ const handler = async (req, res) => {
 					const userChats = chats.filter(({ name }) =>
 						name.toLowerCase().startsWith(starts.toLowerCase())
 					);
-					const groupChats = await Chat.find({
+					const globalChatsUnfiltered = await Chat.find({
 						personal: false,
 						name: { $regex: new RegExp(`^${starts}`, 'gi') },
-					}).select('name _id');
+					}).select('name _id personal');
+					const globalChats = globalChatsUnfiltered.filter(
+						(chat) => !user.chats.includes(chat._id)
+					);
 
-					return res.json({ userChats, groupChats });
+					return res.json({ userChats, globalChats });
 				});
 				break;
 			default:
