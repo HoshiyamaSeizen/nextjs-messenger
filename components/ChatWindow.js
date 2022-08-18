@@ -17,7 +17,7 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 			loadChatAction(chatid)
 				.then((res) => {
 					setChat(res.chat);
-					if (res.chat.members.length > 0) socket.emit('joinChat', res.chat._id);
+					if (res.chat.members.length > 0) socket.emit('joinChat', res.chat.dbid);
 					setTimeout(() => {
 						if (lastElement.current) lastElement.current.scrollIntoView();
 					}, 10);
@@ -58,7 +58,7 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 				loadChatAction(chatid)
 					.then((res) => {
 						setChat(res.chat);
-						if (res.chat.members.length > 0) socket.emit('joinChat', res.chat._id);
+						if (res.chat.members.length > 0) socket.emit('joinChat', res.chat.dbid);
 					})
 					.catch((err) => console.log(err));
 				updateList();

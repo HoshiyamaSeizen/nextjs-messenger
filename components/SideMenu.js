@@ -114,10 +114,7 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 					<ul>
 						{userchats.map((chat) =>
 							(isPeople() && chat.personal) || (isGroups() && !chat.personal) ? (
-								<li
-									key={chat._id}
-									onClick={() => setChat(chat.personal ? chat.bdid : chat._id)}
-								>
+								<li key={chat._id} onClick={() => setChat(chat.dbid)}>
 									{chat.name}
 									<span>#{(chat._id + '').padStart(4, '0')}</span>
 								</li>
@@ -128,7 +125,7 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 								<li
 									key={chat._id}
 									className={index === 0 ? styles.firstGlobal : ''}
-									onClick={() => setChat(chat._id)}
+									onClick={() => setChat(chat.dbid)}
 								>
 									{chat.name}
 									<span>#{(chat._id + '').padStart(4, '0')}</span>

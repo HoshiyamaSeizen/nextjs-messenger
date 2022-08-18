@@ -28,9 +28,15 @@ const handler = async (req, res) => {
 								name: target.name,
 								_id: target._id,
 								personal: true,
-								bdid: chat._id,
+								dbid: chat._id,
 							});
-						} else chats.push({ name: chat.name, _id: chat._id, personal: false });
+						} else
+							chats.push({
+								name: chat.name,
+								_id: chat._id,
+								personal: false,
+								dbid: chat._id,
+							});
 					}
 
 					if (!starts) return res.json({ userChats: chats });

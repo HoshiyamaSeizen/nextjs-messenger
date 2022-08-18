@@ -34,11 +34,11 @@ const handler = async (req, res) => {
 						}
 
 					// Change visible id and name for personal chats (change to target id and name)
+					const cid = chat._id;
 					if (chat.personal && chat.members.length == 2) {
 						const uid = chat.members[0] !== +req.id ? chat.members[0] : chat.members[1];
 						const targetUser = await User.findById(uid).select('name');
 
-						chat.dbid = chat._id;
 						chat._id = targetUser.id;
 						chat.name = targetUser.name;
 					}
@@ -57,6 +57,7 @@ const handler = async (req, res) => {
 							...chat.toObject(),
 							messages,
 							isCreator: chat.creator === +req.id,
+							dbid: cid,
 							members,
 							creationDate: chat.creationDate.getTime(),
 						},
