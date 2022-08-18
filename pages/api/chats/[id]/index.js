@@ -84,7 +84,7 @@ const handler = async (req, res) => {
 					const savedChat = await chat.save();
 					if (!savedChat) return apiError(res, 500, 'Error while saving chat');
 
-					res.json({ message: { ...newMessage, own: true } });
+					res.json({ message: newMessage });
 				});
 				break;
 			case 'PUT':

@@ -7,25 +7,36 @@ import loadChatAction from '../actions/loadChat';
 import sendMessageAction from '../actions/sendMessage';
 import addGroupAction from '../actions/addGroup';
 
-const ChatWindow = ({ chatid, setChatID, updateList }) => {
+const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket }) => {
 	const [chat, setChat] = useState(null);
 	const [message, setMessage] = useState('');
-	const [, updateState] = useState();
 
 	useEffect(() => {
-		if (chatid)
+		if (chatid && socket)
 			loadChatAction(chatid)
-				.then((res) => setChat(res.chat))
+				.then((res) => {
+					setChat(res.chat);
+					if (res.chat.members.length > 0) socket.emit('joinChat', res.chat._id);
+				})
 				.catch((err) => console.log(err));
-	}, [chatid]);
+	}, [chatid, socket]);
+
+	useEffect(() => {
+		if (newMessage.value && chat) {
+			const msg = newMessage.value;
+			msg.own = +msg.user === userid;
+			chat.messages.push(msg);
+			newMessage.clear();
+		}
+	}, [newMessage, chat, userid]);
 
 	const sendMessage = () => {
 		if (message) {
 			setMessage('');
 			sendMessageAction(message, chatid)
 				.then((message) => {
-					chat.messages.push(message);
-					updateState({});
+					message.chatid = chatid;
+					socket.emit('chatMessage', message);
 				})
 				.catch((err) => console.log(err));
 		}
@@ -35,7 +46,10 @@ const ChatWindow = ({ chatid, setChatID, updateList }) => {
 		addGroupAction(chatid)
 			.then((chat) => {
 				loadChatAction(chatid)
-					.then((res) => setChat(res.chat))
+					.then((res) => {
+						setChat(res.chat);
+						if (res.chat.members.length > 0) socket.emit('joinChat', res.chat._id);
+					})
 					.catch((err) => console.log(err));
 				updateList();
 			})
