@@ -1,6 +1,6 @@
 import { faUsers, faUser, faBars, faPaperPlane, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import InfoMenu from './InfoMenu';
 import styles from '../styles/Chat.module.sass';
 import loadChatAction from '../actions/loadChat';
@@ -10,6 +10,7 @@ import addGroupAction from '../actions/addGroup';
 const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket }) => {
 	const [chat, setChat] = useState(null);
 	const [message, setMessage] = useState('');
+	const lastElement = useRef(null);
 
 	useEffect(() => {
 		if (chatid && socket)
@@ -17,6 +18,9 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 				.then((res) => {
 					setChat(res.chat);
 					if (res.chat.members.length > 0) socket.emit('joinChat', res.chat._id);
+					setTimeout(() => {
+						if (lastElement.current) lastElement.current.scrollIntoView();
+					}, 10);
 				})
 				.catch((err) => console.log(err));
 	}, [chatid, socket]);
@@ -27,6 +31,12 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 			msg.own = +msg.user === userid;
 			chat.messages.push(msg);
 			newMessage.clear();
+
+			const container = lastElement.current.parentElement.parentElement;
+			if (Math.abs(container.scrollHeight - container.scrollTop - container.clientHeight) < 10)
+				setTimeout(() => {
+					if (lastElement.current) lastElement.current.scrollIntoView();
+				}, 10);
 		}
 	}, [newMessage, chat, userid]);
 
@@ -89,7 +99,7 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 							<ul>
 								{chat.messages &&
 									chat.messages.map((message) => (
-										<li key={message._id}>
+										<li ref={lastElement} key={message._id}>
 											<div className={message.own ? styles.my : ''}>
 												<p className={styles.username}>{message.name}</p>
 												<p>{message.text}</p>
