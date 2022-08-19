@@ -88,7 +88,9 @@ const SignupForm = ({ className, redirect }) => {
 					onChange={handleChange}
 				/>
 			</div>
-			<button onClick={registerUser}>Sign Up</button>
+			<button onClick={registerUser} aria-label="Sign Up">
+				Sign Up
+			</button>
 		</div>
 	);
 };

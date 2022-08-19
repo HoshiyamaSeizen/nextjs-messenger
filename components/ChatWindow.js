@@ -99,7 +99,11 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 				{chat ? (
 					<>
 						<div className={styles.title}>
-							<button className={styles.mobileReturnBtn} onClick={exitToMenu}>
+							<button
+								className={styles.mobileReturnBtn}
+								onClick={exitToMenu}
+								aria-label="Return to chat menu"
+							>
 								<FontAwesomeIcon icon={faArrowLeft} />
 							</button>
 							<FontAwesomeIcon icon={chat.personal ? faUser : faUsers} />{' '}
@@ -107,7 +111,7 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 								{chat.name}
 								<span>#{(chat._id + '').padStart(4, '0')}</span>
 							</p>
-							<button onClick={openMenu}>
+							<button onClick={openMenu} aria-label="Open info menu">
 								<FontAwesomeIcon icon={faBars} />
 							</button>
 						</div>
@@ -137,12 +141,16 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 									value={message}
 									onChange={handleMessageChange}
 								></textarea>
-								<button onClick={sendMessage}>
+								<button onClick={sendMessage} aria-label="Send">
 									<FontAwesomeIcon icon={faPaperPlane} />
 								</button>
 							</div>
 						) : (
-							<button className={styles.enterButton} onClick={enterChat}>
+							<button
+								className={styles.enterButton}
+								onClick={enterChat}
+								aria-label="Enter the chat"
+							>
 								Enter the chat
 							</button>
 						)}

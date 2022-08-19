@@ -56,7 +56,9 @@ const LoginForm = ({ className, redirect }) => {
 					onChange={handleChange}
 				/>
 			</div>
-			<button onClick={loginUser}>Log In</button>
+			<button onClick={loginUser} aria-label="Log In">
+				Log In
+			</button>
 		</div>
 	);
 };

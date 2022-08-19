@@ -85,10 +85,10 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 						{user.name}
 						<span>#{(user._id + '').padStart(4, '0')}</span>
 					</p>
-					<button onClick={openSettingsModule}>
+					<button onClick={openSettingsModule} aria-label="Open Profile Settings">
 						<FontAwesomeIcon icon={faGear} />
 					</button>
-					<button onClick={logout}>
+					<button onClick={logout} aria-label="Log out">
 						<FontAwesomeIcon icon={faArrowRightFromBracket} />
 					</button>
 				</div>
@@ -100,7 +100,7 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 						value={search}
 						onChange={handleSearchChange}
 					/>
-					<button onClick={searchChats}>
+					<button onClick={searchChats} aria-label="Search chats">
 						<FontAwesomeIcon icon={faMagnifyingGlass} />
 					</button>
 				</div>
@@ -109,6 +109,7 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 						className={styles.tabPeople}
 						chosen={isPeople().toString()}
 						onClick={() => setTab('people')}
+						aria-label="View personal chats"
 					>
 						People
 					</button>
@@ -116,6 +117,7 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 						className={styles.tabGroups}
 						chosen={isGroups().toString()}
 						onClick={() => setTab('groups')}
+						aria-label="View group chats"
 					>
 						Groups
 					</button>
@@ -145,7 +147,10 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 					</ul>
 				</div>
 				<div className={styles.addChat}>
-					<button onClick={openChatModule}>
+					<button
+						onClick={openChatModule}
+						aria-label={isPeople() ? 'Add person' : 'Add group chat'}
+					>
 						{isPeople() ? 'Add Person' : 'Add Chat'} <FontAwesomeIcon icon={faPlus} />
 					</button>
 				</div>

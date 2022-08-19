@@ -32,7 +32,7 @@ const InfoMenu = ({ chat, cid, clearChat, updateList }) => {
 
 	return (
 		<div id="info-container" className={styles.container}>
-			<button className={styles.close} onClick={closeMenu}>
+			<button className={styles.close} onClick={closeMenu} aria-label="Close">
 				<FontAwesomeIcon icon={faXmark} />
 			</button>
 			<h2>Info</h2>
@@ -48,7 +48,11 @@ const InfoMenu = ({ chat, cid, clearChat, updateList }) => {
 					))}
 				</ul>
 			</div>
-			<button className={styles.exitGroupBtn} onClick={exit}>
+			<button
+				className={styles.exitGroupBtn}
+				onClick={exit}
+				aria-label={chat.isCreator || chat.personal ? 'Delete the chat' : 'Exit group chat'}
+			>
 				{chat.isCreator || chat.personal ? 'Delete the chat' : 'Exit group chat'}
 			</button>
 		</div>

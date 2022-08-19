@@ -31,10 +31,10 @@ const ProfileSettings = ({ renameUser, deleteUser }) => {
 				value={name}
 				onChange={handleNameChange}
 			/>
-			<button className={styles.rename} onClick={_rename}>
+			<button className={styles.rename} onClick={_rename} aria-label="Rename">
 				Rename account
 			</button>
-			<button className={styles.delete} onClick={_delete}>
+			<button className={styles.delete} onClick={_delete} aria-label="Delete account">
 				Delete account
 			</button>
 		</Module>

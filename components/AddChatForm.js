@@ -67,6 +67,7 @@ const AddChatForm = ({ tab, addChat }) => {
 						className={styles.tabPeople}
 						chosen={isExisting().toString()}
 						onClick={() => setType('existing')}
+						aria-label="Select existing chat"
 					>
 						Existing
 					</button>
@@ -74,6 +75,7 @@ const AddChatForm = ({ tab, addChat }) => {
 						className={styles.tabGroups}
 						chosen={isNew().toString()}
 						onClick={() => setType('new')}
+						aria-label="Select new chat"
 					>
 						New
 					</button>
@@ -93,7 +95,13 @@ const AddChatForm = ({ tab, addChat }) => {
 				value={text}
 				onChange={handleTextChange}
 			/>
-			<button className={styles.add} onClick={submit}>
+			<button
+				className={styles.add}
+				onClick={submit}
+				aria-label={
+					isPeople() ? 'Add the person' : isNew() ? 'Create new chat' : 'Add existing chat'
+				}
+			>
 				{isPeople() ? 'Add the person' : isNew() ? 'Create new chat' : 'Add existing chat'}
 			</button>
 		</Module>

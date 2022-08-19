@@ -8,7 +8,7 @@ const Module = ({ id, width, height, children }) => {
 	return (
 		<div id={id} className={styles.module}>
 			<div className={styles.container} style={{ width: width + 'px', height: height + 'px' }}>
-				<button className={styles.close} onClick={closeModule}>
+				<button className={styles.close} onClick={closeModule} aria-label="Close">
 					<FontAwesomeIcon icon={faXmark} />
 				</button>
 				{children}
