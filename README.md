@@ -1,5 +1,11 @@
 # NextJS Messenger
 
+## Deployment
+
+The application deployed at Heroku:
+
+<https://hoshiyama-nextjs-messenger.herokuapp.com/>
+
 ## About
 
 This is a messenger created with NextJS framework. The functionality is not very extensive:
