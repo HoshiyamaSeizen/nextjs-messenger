@@ -11,6 +11,7 @@ const handler = async (req, res) => {
 
 	try {
 		switch (method) {
+			/** Get user info (without chats) */
 			case 'GET':
 				const user = await User.findById(id).select('-password -__v -chats');
 				if (!user) return apiError(res, 404, 'User not found');

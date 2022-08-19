@@ -16,6 +16,7 @@ const Chat = ({ userData }) => {
 	const router = useRouter();
 	const redirect = () => router.push('/');
 
+	// Connect and configure sockets when maunted
 	useEffect(() => {
 		(async () => {
 			await fetch('/api/socket');
@@ -57,6 +58,7 @@ const Chat = ({ userData }) => {
 };
 
 export const getServerSideProps = async ({ req: { headers } }) => {
+	// Redirect if no token exists or it's not valid, otherwise load user info
 	const token = headers.cookie ? cookie.parse(headers.cookie)['token'] : null;
 	const res = await validate(token);
 	const userData = JSON.parse(JSON.stringify(res));

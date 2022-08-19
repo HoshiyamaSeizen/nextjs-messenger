@@ -1,10 +1,18 @@
 import axios from 'axios';
 import { setCookie } from 'cookies-next';
 
-const login = (payload) => {
+/**
+ * Action: Authenticate user
+ * @url api/auth
+ * @method POST
+ * @param email - Email
+ * @param password - Password
+ * @returns User info
+ */
+const login = (email, password) => {
 	return new Promise((resolve, reject) => {
 		axios
-			.post('/api/auth', payload)
+			.post('/api/auth', { email, password })
 			.then((res) => {
 				const { msg, token, user } = res.data;
 				if (token) {

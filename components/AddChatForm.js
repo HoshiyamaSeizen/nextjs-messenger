@@ -15,6 +15,7 @@ const AddChatForm = ({ tab, addChat }) => {
 	const isExisting = () => type === 'existing';
 	const isNew = () => type === 'new';
 
+	// Add personal chat to user
 	const addPerson = (id) => {
 		addPersonAction(id)
 			.then((chat) => {
@@ -24,6 +25,7 @@ const AddChatForm = ({ tab, addChat }) => {
 			.catch((err) => setMessage(err));
 	};
 
+	// Add group chat to user
 	const addGroup = (id) => {
 		addGroupAction(id)
 			.then((chat) => {
@@ -33,6 +35,7 @@ const AddChatForm = ({ tab, addChat }) => {
 			.catch((err) => setMessage(err));
 	};
 
+	// Create new group chat
 	const createGroup = (name) => {
 		createGroupAction(name)
 			.then((chat) => {

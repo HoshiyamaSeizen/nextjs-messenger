@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+/**
+ * Action: Send Message
+ * @url api/chats/:chatid
+ * @method POST
+ * @param message - Message to be sent
+ * @param chatid - Chat ID
+ * @returns Message info
+ */
 const sendMessage = (message, chatid) => {
 	return new Promise((resolve, reject) => {
 		axios

@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { deleteCookie, getCookie } from 'cookies-next';
 
+/**
+ * Action: Delete user
+ * @url api/users
+ * @method DELETE
+ */
 const deleteUser = () => {
 	return new Promise((resolve, reject) => {
 		axios

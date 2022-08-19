@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+/**
+ * Action: Delete chat
+ * @url api/chats/:id
+ * @method DELETE
+ * @param message - Message to be sent
+ * @param chatid - Chat ID
+ */
 const deleteChat = (id) => {
 	return new Promise((resolve, reject) => {
 		axios

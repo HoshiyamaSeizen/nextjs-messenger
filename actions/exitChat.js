@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+/**
+ * Action: Exit chat
+ * @url api/chats/:id/user
+ * @method DELETE
+ * @param id - Chat ID
+ */
 const exitChat = (id) => {
 	return new Promise((resolve, reject) => {
 		axios

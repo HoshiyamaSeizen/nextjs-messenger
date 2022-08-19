@@ -20,11 +20,12 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 	const [globalchats, setGlobalChats] = useState([]);
 	const [search, setSearch] = useState('');
 
+	// [Mobile] Open menu when mounted
 	useEffect(() => {
 		document.getElementById('menu-container').setAttribute('opened', '');
 	}, []);
 
-	// Load chats when or update
+	// Load chats when mounted or when update needed
 	useEffect(() => {
 		if (!needChange.value) return;
 		setSearch('');
@@ -46,23 +47,27 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 	};
 	const handleSearchChange = (e) => setSearch(e.target.value);
 
+	// Rename user
 	const renameUser = (newName) => {
-		renameUserAction({ name: newName })
+		renameUserAction(newName)
 			.then(({ name }) => setUser({ ...user, name }))
 			.catch((err) => console.log(err));
 	};
 
+	// Delete user
 	const deleteUser = () => {
 		deleteUserAction()
 			.then(() => redirect())
 			.catch((err) => console.log(err));
 	};
 
+	// User log out
 	const logout = () => {
 		deleteCookie('token');
 		redirect();
 	};
 
+	// [Mobile] Open chat window
 	const openChat = (id) => {
 		setChat(id);
 		document.getElementById('chat-container').setAttribute('opened', '');

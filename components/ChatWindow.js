@@ -18,6 +18,8 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 	const [message, setMessage] = useState('');
 	const lastElement = useRef(null);
 
+	// Load chat info and connect to the chat when Chat ID is changed
+	// 		and scroll to bottom (if the scrollbar was at the bottom before that)
 	useEffect(() => {
 		if (chatid && socket)
 			loadChatAction(chatid)
@@ -31,6 +33,7 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 				.catch((err) => console.log(err));
 	}, [chatid, socket]);
 
+	// Display message in window and scroll to bottom (if the scrollbar was at the bottom before that)
 	useEffect(() => {
 		if (newMessage.value && chat) {
 			const msg = newMessage.value;
@@ -50,6 +53,7 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 		}
 	}, [newMessage, chat, userid]);
 
+	// Send message
 	const sendMessage = () => {
 		if (message) {
 			setMessage('');
@@ -62,6 +66,7 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 		}
 	};
 
+	// Load chat info and connect to the chat (when button pressed)
 	const enterChat = () => {
 		addGroupAction(chatid)
 			.then((chat) => {
@@ -76,11 +81,13 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 			.catch((err) => console.log(err));
 	};
 
+	// [Mobile] Return to menu
 	const exitToMenu = () => {
 		document.getElementById('menu-container').setAttribute('opened', '');
 		document.getElementById('chat-container').removeAttribute('opened');
 	};
 
+	// Date formatting
 	const pad = (num) => num.toString().padStart(2, '0');
 	const formatTime = (ms) => {
 		const date = new Date(ms);

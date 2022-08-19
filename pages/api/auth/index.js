@@ -11,6 +11,7 @@ const handler = async (req, res) => {
 
 	try {
 		switch (method) {
+			/** Get user info */
 			case 'GET':
 				auth(req, res, async () => {
 					const user = await User.findById(req.id);
@@ -25,6 +26,7 @@ const handler = async (req, res) => {
 					});
 				});
 				break;
+			/** Login */
 			case 'POST':
 				const { email, password } = req.body;
 
@@ -68,6 +70,11 @@ const handler = async (req, res) => {
 
 export default handler;
 
+/**
+ * Authenticate user. The function is not inside handler because it's called in getServerSideProps()
+ * @param token - JWT token
+ * @returns User info
+ */
 export const validate = async (token) => {
 	if (!token) return false;
 	try {

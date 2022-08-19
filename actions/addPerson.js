@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+/**
+ * Action: Add user to chat
+ * @url api/chats/
+ * @method POST
+ * @param id - Chat ID
+ * @returns Chat Info
+ */
 const addPerson = (id) => {
 	return new Promise((resolve, reject) => {
 		axios

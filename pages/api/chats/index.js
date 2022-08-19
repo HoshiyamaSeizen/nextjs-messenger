@@ -11,10 +11,12 @@ const handler = async (req, res) => {
 
 	try {
 		switch (method) {
+			/** Get all chats */
 			case 'GET':
-				const chats = await Chat.find({ personal: false });
+				const chats = await Chat.find({ personal: false }).select('-members');
 				res.json({ chats });
 				break;
+			/** Create new chat */
 			case 'POST':
 				auth(req, res, async () => {
 					// Get fields

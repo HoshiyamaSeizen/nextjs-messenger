@@ -8,6 +8,7 @@ const handler = async (req, res) => {
 
 	try {
 		switch (method) {
+			/** Get users info */
 			case 'GET':
 				const usersInfo = await Info.findById('usersInfo');
 				if (!usersInfo) throw Error('Could not get users info');

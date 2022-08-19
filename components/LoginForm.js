@@ -8,9 +8,10 @@ const LoginForm = ({ className, redirect }) => {
 	const [password, setPassword] = useState('');
 	const [message, setMessage] = useState('');
 
+	// User logging
 	const loginUser = () => {
 		setMessage('');
-		login({ email, password })
+		login(email, password)
 			.then(() => redirect())
 			.catch((err) => setMessage(err));
 	};

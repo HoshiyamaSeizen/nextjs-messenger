@@ -12,7 +12,7 @@ const SignupForm = ({ className, redirect }) => {
 
 	const registerUser = () => {
 		setMessage('');
-		register({ name, email, password, password1 })
+		register(name, email, password, password1)
 			.then(() => redirect())
 			.catch((err) => setMessage(err));
 	};

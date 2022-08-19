@@ -34,6 +34,7 @@ const Home = () => {
 };
 
 export const getServerSideProps = async ({ req: { headers } }) => {
+	// Redirect if token exists and it's valid
 	const token = headers.cookie ? cookie.parse(headers.cookie)['token'] : null;
 	if (await validate(token)) {
 		return {

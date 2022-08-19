@@ -7,6 +7,7 @@ import deleteChatAction from '../actions/deleteChat';
 const InfoMenu = ({ chat, cid, clearChat, updateList }) => {
 	const creationDate = new Date(chat.creationDate);
 
+	// Exit or delete chat (depending on user's status)
 	const exit = () => {
 		if (chat.isCreator || chat.personal)
 			deleteChatAction(cid)

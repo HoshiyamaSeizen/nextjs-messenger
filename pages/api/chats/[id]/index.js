@@ -18,6 +18,7 @@ const handler = async (req, res) => {
 		if (!chat) return apiError(res, 404, 'Chat not found');
 
 		switch (method) {
+			/** Get chat info including messages */
 			case 'GET':
 				auth(req, res, async () => {
 					const user = await User.findById(req.id);

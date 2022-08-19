@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+/**
+ * Action: Search chats
+ * @url api/chats/search?starts={query}
+ * @method GET
+ * @param query - Search pattern
+ * @returns found user chats and global chats
+ */
 const searchChats = (query = '') => {
 	return new Promise((resolve, reject) => {
 		axios

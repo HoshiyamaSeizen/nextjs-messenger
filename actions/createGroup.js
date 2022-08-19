@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+/**
+ * Action: Create group chat
+ * @url api/chats/
+ * @method POST
+ * @param name - Chat name
+ * @returns Chat info
+ */
 const createGroup = (name) => {
 	return new Promise((resolve, reject) => {
 		axios
