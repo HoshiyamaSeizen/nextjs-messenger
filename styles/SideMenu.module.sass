@@ -23,6 +23,7 @@
         p
             font-weight: 500
             font-size: 1.6em
+            font-size: min(1.6em, 1.3vw)
             flex: 10
         button
             font-size: 1.1em
@@ -93,3 +94,11 @@
             svg
                 width: 16px
                 margin-left: 10px
+
+@media screen and ( max-width:  728px)
+    .container
+        display: none
+        &[opened]
+            display: flex
+    .profile p
+        font-size: min(1.6em, 5.5vw) !important

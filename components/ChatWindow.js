@@ -1,4 +1,10 @@
-import { faUsers, faUser, faBars, faPaperPlane, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+	faUsers,
+	faUser,
+	faBars,
+	faPaperPlane,
+	faArrowLeft,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 import InfoMenu from './InfoMenu';
@@ -32,11 +38,15 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 			chat.messages.push(msg);
 			newMessage.clear();
 
-			const container = lastElement.current.parentElement.parentElement;
-			if (Math.abs(container.scrollHeight - container.scrollTop - container.clientHeight) < 10)
-				setTimeout(() => {
-					if (lastElement.current) lastElement.current.scrollIntoView();
-				}, 10);
+			if (lastElement.current) {
+				const container = lastElement.current.parentElement.parentElement;
+				if (
+					Math.abs(container.scrollHeight - container.scrollTop - container.clientHeight) < 10
+				)
+					setTimeout(() => {
+						lastElement.current.scrollIntoView();
+					}, 10);
+			}
 		}
 	}, [newMessage, chat, userid]);
 
@@ -66,6 +76,11 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 			.catch((err) => console.log(err));
 	};
 
+	const exitToMenu = () => {
+		document.getElementById('menu-container').setAttribute('opened', '');
+		document.getElementById('chat-container').removeAttribute('opened');
+	};
+
 	const pad = (num) => num.toString().padStart(2, '0');
 	const formatTime = (ms) => {
 		const date = new Date(ms);
@@ -80,10 +95,13 @@ const ChatWindow = ({ chatid, userid, setChatID, updateList, newMessage, socket 
 
 	return (
 		<>
-			<div className={styles.container}>
+			<div id="chat-container" className={styles.container}>
 				{chat ? (
 					<>
 						<div className={styles.title}>
+							<button className={styles.mobileReturnBtn} onClick={exitToMenu}>
+								<FontAwesomeIcon icon={faArrowLeft} />
+							</button>
 							<FontAwesomeIcon icon={chat.personal ? faUser : faUsers} />{' '}
 							<p>
 								{chat.name}

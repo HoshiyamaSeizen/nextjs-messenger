@@ -20,6 +20,10 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 	const [globalchats, setGlobalChats] = useState([]);
 	const [search, setSearch] = useState('');
 
+	useEffect(() => {
+		document.getElementById('menu-container').setAttribute('opened', '');
+	}, []);
+
 	// Load chats when or update
 	useEffect(() => {
 		if (!needChange.value) return;
@@ -59,6 +63,12 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 		redirect();
 	};
 
+	const openChat = (id) => {
+		setChat(id);
+		document.getElementById('chat-container').setAttribute('opened', '');
+		document.getElementById('menu-container').removeAttribute('opened');
+	};
+
 	const isPeople = () => tab === 'people';
 	const isGroups = () => tab === 'groups';
 
@@ -69,7 +79,7 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 
 	return (
 		<>
-			<div className={styles.container}>
+			<div id="menu-container" className={styles.container}>
 				<div className={styles.profile}>
 					<p>
 						{user.name}
@@ -114,7 +124,7 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 					<ul>
 						{userchats.map((chat) =>
 							(isPeople() && chat.personal) || (isGroups() && !chat.personal) ? (
-								<li key={chat._id} onClick={() => setChat(chat.dbid)}>
+								<li key={chat._id} onClick={() => openChat(chat.dbid)}>
 									{chat.name}
 									<span>#{(chat._id + '').padStart(4, '0')}</span>
 								</li>
@@ -125,7 +135,7 @@ const SideMenu = ({ user, setUser, redirect, setChat, needChange }) => {
 								<li
 									key={chat._id}
 									className={index === 0 ? styles.firstGlobal : ''}
-									onClick={() => setChat(chat.dbid)}
+									onClick={() => openChat(chat.dbid)}
 								>
 									{chat.name}
 									<span>#{(chat._id + '').padStart(4, '0')}</span>

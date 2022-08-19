@@ -39,6 +39,8 @@
                     transition: color 200ms ease-in
             &:hover svg path
                 color: $danger-color
+        .mobileReturnBtn
+            display: none
     .messageListContainer
         flex: 10
         overflow: auto
@@ -100,3 +102,11 @@
         margin: 0 auto 10px
         font-size: 1em
         @include button-transition($button-hover-color)
+
+@media screen and ( max-width:  728px)
+    .container
+        display: none
+        &[opened]
+            display: flex
+    .mobileReturnBtn
+        display: block !important

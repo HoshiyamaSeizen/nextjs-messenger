@@ -47,3 +47,42 @@
     footer
         position: absolute
         bottom: 5%
+
+@media screen and ( max-width: 728px )
+    .root
+        padding: 30px 20px
+
+        input::placeholder
+            color: transparent
+        input::-webkit-input-placehold
+            color: transparent
+        input:-moz-placeholder
+            color: transparent
+        input::-moz-placeholder
+            color: transparent
+        input:-ms-input-placeholder
+            color: transparent
+
+        header
+            margin-bottom: 30px
+
+        .signup
+            margin: 20px 0 !important
+            padding: 0 20px 0 0 !important
+        .login
+            margin: 20px 0 !important
+            padding: 0 0 0 20px !important
+
+@media screen and ( max-height: 710px )
+    .root
+        padding: 30px 20px
+
+        header
+            margin-bottom: 30px
+
+        .signup
+            margin: 20px 0 !important
+            padding: 0 20px 0 0 !important
+        .login
+            margin: 20px 0 !important
+            padding: 0 0 0 20px !important
