@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
@@ -13,11 +12,6 @@ const Home = () => {
 
 	return (
 		<div className={styles.root}>
-			<Head>
-				<title>Messenger</title>
-				<meta name="description" content="Messenger created with NextJS" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
 			<header>
 				<h1>NextJS Messenger</h1>
 			</header>
