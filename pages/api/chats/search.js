@@ -48,9 +48,16 @@ const handler = async (req, res) => {
 						personal: false,
 						name: { $regex: new RegExp(`^${starts}`, 'gi') },
 					}).select('name _id personal');
-					const globalChats = globalChatsUnfiltered.filter(
-						(chat) => !user.chats.includes(chat._id)
-					);
+					const globalChats = globalChatsUnfiltered
+						.filter((chat) => !user.chats.includes(chat._id))
+						.map((chat) => {
+							return {
+								name: chat.name,
+								_id: chat._id,
+								personal: false,
+								dbid: chat._id,
+							};
+						});
 
 					return res.json({ userChats, globalChats });
 				});
