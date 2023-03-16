@@ -2,9 +2,11 @@
 
 ## Deployment
 
-The application deployed at Heroku:
+~~The application deployed at Heroku~~:
 
-<https://hoshiyama-nextjs-messenger.herokuapp.com/>
+~~<https://hoshiyama-nextjs-messenger.herokuapp.com/>~~
+
+Heroku does not provide free dynos anymore, so the applicatoin is down
 
 ## About
 
